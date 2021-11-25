@@ -14,12 +14,18 @@ def get_files_type(_file_name: str):
 
 
 def add_type(_file_name: str, _type: str):
+    """
+    增加文件类型关键字至二进制文件最后面
+    """
     with open(_file_name, 'ba+') as f:
         f.seek(0, 2)
         f.write(('\n' + _type).encode())
 
 
 def del_type(_file_name: str):
+    """
+    删除二进制文件最后面的.jpg这种描述
+    """
     with open(_file_name, "rb") as f:
         f_list = f.readlines()
         f.close()
@@ -32,6 +38,9 @@ def del_type(_file_name: str):
 
 
 def replace_type(_file_name: str):
+    """
+    更改名称，主要是更改后缀名
+    """
     if get_files_type(_file_name) != '.txt':
         old_name = _file_name
         new_name = _file_name.replace(get_files_type(_file_name), '.txt')
