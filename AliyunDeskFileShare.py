@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import os
-# import sys
 
 
-def get_files_type(_file_name: str):
+def get_files_type(_file_name: str) -> str:
     """
     获取文件后缀名
     :param _file_name: 文件路径/名称
@@ -37,14 +36,13 @@ def del_type(_file_name: str):
         f.truncate()
 
 
-def replace_type(_file_name: str):
+def replace_type(_file_name: str) -> str:
     """
     更改名称，主要是更改后缀名
     """
     if get_files_type(_file_name) != '.txt':
         old_name = _file_name
         new_name = _file_name.replace(get_files_type(_file_name), '.txt')
-        print(old_name, new_name)
         os.rename(old_name, new_name)
         return new_name
     if get_files_type(_file_name) == '.txt':
@@ -55,11 +53,10 @@ def replace_type(_file_name: str):
         if _rel_type[0] == '.':
             old_name = _file_name
             new_name = _file_name.replace(get_files_type(_file_name), _rel_type)
-            print(old_name, new_name)
             os.rename(old_name, new_name)
             return new_name
         else:
-            return False
+            return 'False'
 
 
 if __name__ == '__main__':
@@ -67,11 +64,11 @@ if __name__ == '__main__':
     if get_files_type(file_name) == '.txt':
         file_name = replace_type(file_name)
         if file_name:
-            rel_type = del_type(file_name)
-            print(' -----> ', file_name)
+            del_type(file_name)
+            print('Success -----> ', file_name)
         else:
             print(file_name)
     else:
         add_type(file_name, get_files_type(file_name))
         file_name = replace_type(file_name)
-        print(' -----> ', file_name)
+        print('Success -----> ', file_name)
